@@ -1,5 +1,5 @@
 service: sls-swapi-v1
-frameworkVersion: '3'
+frameworkVersion: "3"
 
 provider:
   name: aws
@@ -9,7 +9,7 @@ provider:
     - Effect: Allow
       Action:
         - dynamodb:*
-      Resource: 
+      Resource:
         - arn:aws:dynamodb:sa-east-1:862454797065:table/CharactersTable
 
 functions:
@@ -30,6 +30,18 @@ functions:
     events:
       - httpApi:
           path: /api-docs
+          method: get
+  login:
+    handler: dist/routes/login.login
+    events:
+      - httpApi:
+          path: /login
+          method: post
+  validateToken:
+    handler: dist/routes/validate.validateToken
+    events:
+      - httpApi:
+          path: /validate-token
           method: get
 resources:
   Resources:
